@@ -10,26 +10,23 @@ public class D05_hoverCategoriesStepDef {
 
     P03_homePage hover = new P03_homePage();
     String expectedTitle;
+    static int random ;
 
 
     @When("user select random one of the three main categories")
     public void userSelectRandomOneOfTheThreeMainCategories() throws InterruptedException {
-
-       int rand = hover.selectRandomCate(hover.allCategories());
-        hover.hoverOnRandomCategory(hover.allCategories(), rand);
+        random = hover.hoverOnRandomCategory();
     }
 
     @And("user select random one of the three sub categories")
     public void userSelectRandomOneOfTheThreeSubCategories() {
-        int random =hover.selectRandomCate(hover.subCategories());
-        expectedTitle = hover.subCategories().get(random).getText();
-        hover.subCategories().get(random).click();
+        expectedTitle = hover.chooseSubCategory(random);
     }
 
     @Then("user is directed to the category page")
     public void userIsDirectedToTheCategoryPage() {
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(hover.pageTitle().getText().toLowerCase().trim().contains(expectedTitle));
+        softAssert.assertTrue(hover.pageTitle().getText().equals(expectedTitle));
         softAssert.assertAll();
     }
 }

@@ -1,4 +1,4 @@
-#@smoke
+@smoke
 Feature: F01_Register | users could register with new accounts
   Scenario:
     Given user go to register page

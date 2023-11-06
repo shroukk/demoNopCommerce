@@ -1,4 +1,4 @@
-#@smoke
+@smoke
 Feature: F05_hoverCategories | users could choose the category
   Scenario:
     When user select random one of the three main categories

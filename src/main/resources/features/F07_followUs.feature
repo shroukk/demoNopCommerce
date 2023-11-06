@@ -1,4 +1,4 @@
-#@smoke
+@smoke
 Feature: F07_followUs | users could open followUs links
   Scenario: user opens facebook link
     When user opens facebook link

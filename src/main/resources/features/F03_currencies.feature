@@ -1,4 +1,4 @@
-#@smoke
+@smoke
 Feature: F03_currencies | users could choose the currency
   Scenario:
     When user Select the preferred currency

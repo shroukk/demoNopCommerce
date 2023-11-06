@@ -4,10 +4,6 @@ import org.example.stepDefs.Hooks;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 import java.util.List;
 
 public class P03_homePage {
@@ -19,10 +15,6 @@ public class P03_homePage {
 
     By product_by_sku = By.className("sku");
 
-    By all_categories = By.cssSelector("ul[class=\"top-menu notmobile\"] li");
-
-    By sub_categories = By.cssSelector("ul[class=\"top-menu notmobile\"] li li");
-
     By page_title = By.cssSelector("[class=\"page-title\"] h1");
 
     By get_slider_link = By.cssSelector("[class=\"nivo-imageLink\"]");
@@ -31,11 +23,11 @@ public class P03_homePage {
 
     By wishlist_btn = By.cssSelector("[class=\"button-2 add-to-wishlist-button\"]");
 
-    public By wishlist_success_msg = By.cssSelector("[class=\"bar-notification success\"]");
+    By wishlist_success_msg = By.cssSelector("div[class=\"bar-notification success\"]");
 
-    By wishlist_tab = By.cssSelector("[class=\"header-links\"] a[href=\"/wishlist\"]");
+    By wishlist_tab = By.cssSelector("span[class=\"wishlist-label\"]");
 
-    By wishlist_quantity_value= By.cssSelector("input[name=\"itemquantity11219\"]");
+    By wishlist_quantity_value= By.cssSelector("input[class=\"qty-input\"]");
 
 
     public WebElement customerCurrency(){
@@ -60,35 +52,34 @@ public class P03_homePage {
         return Hooks.driver.findElement(product_by_sku);
     }
 
-    public  List<WebElement> allCategories(){
-        return Hooks.driver.findElements(all_categories);
-    }
 
-    public List<WebElement> subCategories(){
-        return Hooks.driver.findElements(sub_categories);
-
-    }
 
     public int selectRandomCate(List<WebElement> category){
-        int count = category.size();
-        System.out.println(count);
-
-
-
         int min = 0;
         int max = 2;   // you are selecting random value from 0 to 2 that's why  max = count-1
         int selectedUser = (int) Math.floor(Math.random() * (max - min + 1) + min);
-        System.out.println(selectedUser);
         return selectedUser;
 
     }
 
-    public void hoverOnRandomCategory(List<WebElement> category, int num) throws InterruptedException {
+    By SelectedMainCategory = By.cssSelector("[class=\"top-menu notmobile\"]> li");
+    public int hoverOnRandomCategory() {
+        List<WebElement> mainCategory= Hooks.driver.findElements(SelectedMainCategory);
+        int randomCate = selectRandomCate(mainCategory);
         Actions action = new Actions(Hooks.driver);
-        action.moveToElement(category.get(num)).perform();
-        Thread.sleep(10000);
-
+        action.moveToElement(mainCategory.get(randomCate)).perform();
+        return randomCate;
     }
+    public String chooseSubCategory(int randomCate){
+        By SelectedSubCategory = By.cssSelector("[class=\"top-menu notmobile\"]> li:nth-child("+(randomCate+1)+") li");
+        System.out.println("[class=\"top-menu notmobile\"]> li:nth-child("+(randomCate+1)+") li");
+        List<WebElement> SubCategory=Hooks.driver.findElements(SelectedSubCategory);
+        int randomSubCate = selectRandomCate(SubCategory);
+        String title = SubCategory.get(randomSubCate).getText();
+        SubCategory.get(randomSubCate).click();
+        return title;
+    }
+
 
     public WebElement pageTitle(){
         return Hooks.driver.findElement(page_title);

@@ -30,8 +30,8 @@ public class D06_homeSlidersStepDef {
 
     }
 
-    @Then("user is directed to the Nokia Lumia page")
-    public void userIsDirectedToTheNokiaLumiaPage() {
+    @Then("user is directed to the iPhone page")
+    public void userIsDirectedToTheIPhonePage() {
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(Hooks.driver.getCurrentUrl().equals("https://demo.nopcommerce.com/iphone-6"));
         softAssert.assertAll();
@@ -48,10 +48,11 @@ public class D06_homeSlidersStepDef {
 
     }
 
-    @Then("user is directed to the iPhone page")
-    public void userIsDirectedToTheIPhonePage() {
+    @Then("user is directed to the Nokia Lumia 1020 page")
+    public void userIsDirectedToTheNokiaLumiaPage() {
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(Hooks.driver.getCurrentUrl().equals("https://demo.nopcommerce.com/nokia-lumia-1020"));
         softAssert.assertAll();
+        System.out.println(Hooks.driver.getCurrentUrl());
     }
 }

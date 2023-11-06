@@ -48,9 +48,6 @@ public class D04_searchStepDef {
 
         }
         softAssert.assertAll();
-
-
-
     }
 
     @Then("user is directed to the result products using serial number {string} page")
